@@ -1,0 +1,173 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head %}
+    {% block head_form %}
+    <link href="{% static 'lib/select2-4.0.13/css/select2.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'lib/select2-4.0.13/css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'lib/select2-4.0.13/js/select2.min.js' %}"></script>
+    <script src="{% static 'lib/select2-4.0.13/js/i18n/es.js' %}"></script>
+    {% endblock %}
+{% endblock %}
+{% block content %}
+    <form method="post" action="." enctype="multipart/form-data">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">
+                    {% if action == 'add' %}
+                        <i class="fas fa-plus"></i>
+                    {% else %}
+                        <i class="fas fa-edit"></i>
+                    {% endif %}
+
+                    {{ title }}
+                </h3>
+            </div>
+            <div class="card-body" style="background-color: black; color: white ; font-size:22px ; font-family:Saira Extra Condensed, sans-serif;">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="{{ action }}">
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al querer guardar el registro</h5>
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-1 col-md-1">Fecha: </div>
+                        <div class="col-xs-2 col-md-2">{% render_field form.date_joined type="date" %}</div>
+                        <div class="col-xs-1 col-md-1">Edad: </div>
+                        <div class="col-xs-2 col-md-2">{{form.edad}}</div>
+                        <div class="col-xs-2 col-md-2">{{ form.identificacion.label }}: </div>
+                        <div class="col-xs-4 col-md-4">{{form.identificacion}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2">{{ form.name.label }}: </div>
+                        <div class="col-xs-10 col-md-10">{{form.name}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2">{{ form.cirugias.label }}:</div>
+                        <div class="col-xs-10 col-md-10">{% render_field form.cirugias type="text-area" %}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2">{{ form.cirujano.label }}:</div>
+                        <div class="col-xs-4 col-md-4">{{ form.cirujano }}</div>
+                        <div class="col-xs-2 col-md-2">{{ form.cirujano2.label }}:</div>
+                        <div class="col-xs-4 col-md-4">{{ form.cirujano2 }}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">Inicio Anestesia: {% render_field form.inicioanestesia type="time" %}</div>
+
+                        <div class="col-xs-6 col-md-6">Inicio Cirugia: {% render_field form.iniciocirugia type="time" %}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">Fin Cirugia: {% render_field form.finalizacioncirugia type="time" %}</div>
+                        <div class="col-xs-6 col-md-6">Fin Anestesia: {% render_field form.finalizacionanestesia type="time" %}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2">{{ form.klein.label }}:</div>
+                        <div class="col-xs-10 col-md-10">{{ form.klein }}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2">{{ form.extrae.label }}:</div>
+                        <div class="col-xs-4 col-md-4">{{ form.extrae }}</div>
+                        <div class="col-xs-2 col-md-2">{{ form.transferencia.label }}:</div>
+                        <div class="col-xs-4 col-md-4">{{ form.transferencia }}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-1 col-md-1">{{ form.md.label }}:</div>
+                        <div class="col-xs-5 col-md-5">{{ form.md }}</div>
+                        <div class="col-xs-1 col-md-1">{{ form.mi.label }}:</div>
+                        <div class="col-xs-5 col-md-5">{{ form.mi }}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-3 col-md-2">{{ form.colgajo.label}}:</div>
+                        <div class="col-xs-3 col-md-4">{{ form.colgajo }}</div>
+                        <div class="col-xs-3 col-md-2">{{ form.colgajo2.label }}:</div>
+                        <div class="col-xs-3 col-md-4">{{ form.colgajo2 }}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">{{ form.observaciones.label}}:</div>
+                        <div class="col-xs-12 col-md-12" >{{ form.observaciones}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">{{ form.duracion.label}}:</div>
+                        <div class="col-xs-8 col-md-8" >{{ form.duracion}}</div>
+                    </div>
+                </div>
+                <div >Foto de perfil:</div>
+                <div class="img-responsive">{{ form.image }}</div>
+  
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-flat">
+                    <i class="fas fa-save"></i> Guardar registro
+                </button>
+                <a href="{{ list_url }}" class="btn btn-danger btn-flat">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </div>
+    </form>
+    <script>
+        $(function () {
+            $('.select2').select2({
+                theme: "bootstrap4",
+                language: 'es'
+            });
+        });
+        {% if form.errors %}
+            var errors = '';
+            {% for field in form %}
+                {% for error in field.errors %}
+                    errors += '{{ error }}\n';
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                errors += '{{ error }}\n';
+            {% endfor %}
+            Swal.fire({
+                title: 'Error!',
+                text: errors,
+                icon: 'error'
+            });
+        {% endif %}
+
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            var parameters = new FormData(this);
+            submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
+                location.href = '{{ list_url }}';
+            });
+        });
+    </script>
+{% endblock %}
