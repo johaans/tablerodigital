@@ -20,45 +20,45 @@ class ReportSaleView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         data = {}
-        try:
-            action = request.POST['action']
-            if action == 'search_report':
-                data = []
-                start_date = request.POST.get('start_date', '')
-                end_date = request.POST.get('end_date', '')
-                search = Product.objects.all()
-                if len(start_date) and len(end_date):
-                    search = search.filter(date_joined__range=[start_date, end_date])
-                for s in search:
-                    data.append([
-                        s.id,
-                        s.name,
-                        s.edad,
-                        s.identidicacion,
-                        s.cirugias,
-                        s.cirujano.name,
-                        s.cirujano2.name,
-                        s.date_joined.strftime('%Y-%m-%d'),
-                        s.observaciones,
-                    ])
-
-
+        #try:
+        action = request.POST['action']
+        if action == 'search_report':
+            data = []
+            start_date = request.POST.get('start_date', '')
+            end_date = request.POST.get('end_date', '')
+            search = Product.objects.all()
+            if len(start_date) and len(end_date):
+                search = search.filter(date_joined__range=[start_date, end_date])
+            for s in search:
                 data.append([
-                    '---',
-                    '---',
-                    '---',
-                    '---',
-                    '---',
-                    '---',
-                    '---',
-                    '---',
-                    '---',
-                    
+                    s.id,
+                    s.name,
+                    s.edad,
+                    s.identificacion,
+                    s.cirugias,
+                    #s.cirujano.name,
+                    #s.cirujano2.name,
+                    s.date_joined.strftime('%Y-%m-%d'),
+                    s.observaciones,
                 ])
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
+
+
+            data.append([
+                '---',
+                '---',
+                '---',
+                '---',
+                '---',
+                '---',
+                '---',
+                '---',
+                '---',
+                
+            ])
+        else:
+            data['error'] = 'Ha ocurrido un error'
+        #except Exception as e:
+        #    data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
     def get_context_data(self, **kwargs):

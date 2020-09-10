@@ -70,7 +70,7 @@ function generate_report() {
                             alignment: 'center'
                         }
                     };
-                    doc.content[1].table.widths = ['20%', '20%', '15%', '15%', '15%', '15%'];
+                    doc.content[1].table.widths = ['5%', '25%','5%' ,'10%', '20%', '10%', '25%'];
                     doc.content[1].margin = [0, 35, 0, 0];
                     doc.content[1].layout = {};
                     doc['footer'] = (function (page, pages) {
@@ -104,7 +104,7 @@ function generate_report() {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return '$' + parseFloat(data).toFixed(2);
+                    return data;
                 }
             },
         ],

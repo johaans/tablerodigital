@@ -49,8 +49,8 @@ class Category(models.Model):
         return item
 
     class Meta:
-        verbose_name = 'Categoria'
-        verbose_name_plural = 'Categorias'
+        verbose_name = 'Medico'
+        verbose_name_plural = 'Medicos'
         ordering = ['id']
 
 
@@ -97,7 +97,7 @@ class Product(models.Model):
 
     class Meta:
         verbose_name = 'Paciente'
-        verbose_name_plural = 'Pacientea'
+        verbose_name_plural = 'Pacientes'
         ordering = ['date_joined']
 
 

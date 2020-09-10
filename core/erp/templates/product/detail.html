@@ -1,10 +1,14 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% load thumbnail %}
 {% block head %}
     {% block head_form %}
 
     {% endblock %}
+    <link rel="stylesheet" href="{% static 'product/css/slider.css' %}">
+    <script src="{% static 'js/functions.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -109,8 +113,49 @@
                         <div class="col-xs-8 col-md-8" >{{ product.duracion}}</div>
                     </div>
                 </div>
-                <div >Imagen:</div>
-                <img class="img-responsive" src="{{ product.get_image }}">
+                <section class="awSlider">
+                    <div  class="carousel slide" data-ride="carousel">
+                      <!-- Indicators -->
+                      <ol class="carousel-indicators">
+                        <li data-target=".carousel" data-slide-to="0" class="active"></li>
+                        <li data-target=".carousel" data-slide-to="1"></li>
+                        <li data-target=".carousel" data-slide-to="2"></li>
+                        <li data-target=".carousel" data-slide-to="3"></li>
+                      </ol>
+                  
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="{{ product.get_image }}">
+                          <div class="carousel-caption">Paciente</div>
+                        </div>
+                        <!--<div class="item">
+                          <img src="http://www.adobewordpress.com/wp-content/uploads/2014/02/wallpaper-thumb-101.jpg">
+                          <div class="carousel-caption">Görsel #2</div>
+                        </div>
+                        
+                        <div class="item">
+                          <img src="http://www.adobewordpress.com/wp-content/uploads/2014/02/wallpaper-thumb-1051.jpg">
+                          <div class="carousel-caption">Görsel #3</div>
+                        </div>
+                        <div class="item">
+                          <img src="http://www.adobewordpress.com/wp-content/uploads/2013/07/wallpaper-thumb-74.jpg">
+                          <div class="carousel-caption">Görsel #4</div>
+                        </div> -->
+                      </div>
+                  
+                      <!-- Controls -->
+                      <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Left</span>
+                      </a>
+                      <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Right</span>
+                      </a>
+                    </div>
+                  </section>
+                  
             </div>
             <div class="card-footer">
                 <a href="{{ update_url }}" class="btn btn-danger btn-flat">
@@ -122,4 +167,20 @@
             </div>
         </div>
 
+{% endblock %}
+{% block javascript %}
+<script>
+$('section.awSlider .carousel').carousel({
+	pause: "hover",
+  interval: 2000
+});
+
+var startImage = $('section.awSlider .item.active > img').attr('src');
+$('section.awSlider').append('<img src="' + startImage + '">');
+
+$('section.awSlider .carousel').on('slid.bs.carousel', function () {
+ var bscn = $(this).find('.item.active > img').attr('src');
+	$('section.awSlider > img').attr('src',bscn);
+});
+</script>
 {% endblock %}

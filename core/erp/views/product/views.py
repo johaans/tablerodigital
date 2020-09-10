@@ -36,10 +36,10 @@ class ProductListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListV
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Productos'
+        context['title'] = 'Listado de Pacientes'
         context['create_url'] = reverse_lazy('erp:product_create')
         context['list_url'] = reverse_lazy('erp:product_list')
-        context['entity'] = 'Productos'
+        context['entity'] = 'Pacientes'
         return context
 
 
@@ -69,8 +69,8 @@ class ProductCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Cre
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de un Producto'
-        context['entity'] = 'Productos'
+        context['title'] = 'Creación de un Paciente'
+        context['entity'] = 'Pacientes'
         context['list_url'] = self.success_url
         context['action'] = 'add'
         return context
@@ -103,8 +103,8 @@ class ProductUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Upd
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edición de un Producto'
-        context['entity'] = 'Productos'
+        context['title'] = 'Edición de un Paciente'
+        context['entity'] = 'Pacientes'
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         return context
@@ -115,8 +115,8 @@ class ProductDetailView(LoginRequiredMixin,ValidatePermissionRequiredMixin,Detai
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Detalles de Usuario'
-        context['entity'] = 'Usuarios'
+        context['title'] = 'Detalles de Paciente'
+        context['entity'] = 'Pacientes'
         context['create_url'] = reverse_lazy('erp:product_create')
         context['list_url'] = reverse_lazy('erp:product_list')
         context['update_url'] = reverse_lazy('erp:product_list')
@@ -145,7 +145,7 @@ class ProductDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Del
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de un Producto'
-        context['entity'] = 'Productos'
+        context['title'] = 'Eliminación de un Paciente'
+        context['entity'] = 'Pacientes'
         context['list_url'] = self.success_url
         return context

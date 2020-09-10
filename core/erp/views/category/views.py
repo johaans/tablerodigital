@@ -39,10 +39,10 @@ class CategoryListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, List
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Categorías'
+        context['title'] = 'Listado de Medicos'
         context['create_url'] = reverse_lazy('erp:category_create')
         context['list_url'] = reverse_lazy('erp:category_list')
-        context['entity'] = 'Categorias'
+        context['entity'] = 'Medicos'
         return context
 
 
@@ -72,8 +72,8 @@ class CategoryCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Cr
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación una Categoria'
-        context['entity'] = 'Categorias'
+        context['title'] = 'Creación de un Medico'
+        context['entity'] = 'Medicos'
         context['list_url'] = self.success_url
         context['action'] = 'add'
         return context
@@ -106,8 +106,8 @@ class CategoryUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Up
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edición una Categoria'
-        context['entity'] = 'Categorias'
+        context['title'] = 'Edición de un Medico'
+        context['entity'] = 'Medicos'
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         return context
@@ -134,7 +134,7 @@ class CategoryDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, De
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de una Categoria'
-        context['entity'] = 'Categorias'
+        context['title'] = 'Eliminación de un Medico'
+        context['entity'] = 'Medicos'
         context['list_url'] = self.success_url
         return context
