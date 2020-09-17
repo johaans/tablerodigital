@@ -94,11 +94,16 @@ class ProductForm(ModelForm):
                 ),
                 'cirugias': forms.Textarea(
                 attrs={
-                    'placeholder': 'Ingrese las observaciones si las hay.',
+                    'placeholder': 'Ingrese las cirugias a realizar.',
                     'rows': 2,
                     'cols': 2
                 }
                 ),
+                'procedimientos': forms.SelectMultiple(attrs={
+                'class': 'form-control select2',
+                'style': 'width: 100%',
+                'multiple': 'multiple'
+            })
         }
 
     def save(self, commit=True):

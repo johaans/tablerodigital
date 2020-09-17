@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from core.erp.models import Sale, Product, DetSale,Category
+from core.erp.models import Sale, Product, DetSale,Category,Procedimientos
 
 from random import randint
 
@@ -41,6 +41,18 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                     'colorByPoint': True,
                     'data': self.get_graph_sales_products_year_month(),
                 }
+            elif action == 'get_graph_sales_products_year_month2':
+                data = {
+                    'name': 'Porcentaje',
+                    'colorByPoint': True,
+                    'data': self.get_graph_sales_products_year_month2(),
+                }
+            elif action == 'get_graph_procedimientos_year_month':
+                data = {
+                    'name': 'Porcentaje',
+                    'colorByPoint': True,
+                    'data': self.get_graph_procedimientos_year_month(),
+                }
             elif action == 'get_graph_online':
                 data = {'y': randint(1, 100)}
                 print(data)
@@ -69,6 +81,41 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             for p in Category.objects.all():
                 total = Product.objects.filter(date_joined__year=year, date_joined__month=month,
                                                cirujano_id=p.id).count()
+                if total > 0:
+                    data.append({
+                        'name': p.name,
+                        'y': float(total)
+                    })
+        except:
+            pass
+        return data
+
+    def get_graph_sales_products_year_month2(self):
+        data = []
+        year = datetime.now().year
+        month = datetime.now().month
+        try:
+            for p in Category.objects.all():
+                total = Product.objects.filter(date_joined__year=year, date_joined__month=month,
+                                               cirujano2_id=p.id).count()
+                if total > 0:
+                    data.append({
+                        'name': p.name,
+                        'y': float(total)
+                    })
+        except:
+            pass
+        return data
+
+    def get_graph_procedimientos_year_month(self):
+        data = []
+        year = datetime.now().year
+        month = datetime.now().month
+        try:
+            for p in Procedimientos.objects.all():
+                total = Product.objects.filter(date_joined__year=year, date_joined__month=month,
+                                               procedimientos_id=p.id).count()
+                                               
                 if total > 0:
                     data.append({
                         'name': p.name,

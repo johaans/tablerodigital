@@ -40,3 +40,5 @@ class Bussinesadmin(ImportExportModelAdmin,admin.ModelAdmin):
     search_fields = ('name',)
     resource_class=Bussines
 admin.site.register(Bussines,Bussinesadmin)
+
+admin.site.register(Procedimientos)
