@@ -33,57 +33,6 @@
             list-style: none;
         }
 
-        ul.slider{
-        position: relative;
-        width: 600px;
-        height: 650px;
-        }
-
-        ul.slider li {
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            opacity: 0;
-            width: inherit;
-            height: inherit;
-            transition: opacity .5s;
-        }
-
-        ul.slider li img{
-        width: 100%;
-        height: 650px;
-        object-fit: cover;
-        }
-
-        ul.slider li:first-child {
-            opacity: 1; /*Mostramos el primer <li>*/
-        }
-
-        ul.slider li:target {
-            opacity: 1; /*Mostramos el <li> del enlace que pulsemos*/
-        }
-
-        .menu{
-        text-align: center;
-        margin: 20px;
-        }
-
-        .menu li{
-        display: inline-block;
-        text-align: center;
-        }
-
-        .menu li a{
-        display: inline-block;
-        color: white;
-        text-decoration: none;
-        background-color: grey;
-        padding: 20px;
-        width: 20px;
-        height: 20px;
-        font-size: 20px;
-        border-radius: 100%;
-        }
 
         .container.gallery-container {
     background-color: #fff;
@@ -149,187 +98,93 @@
 {% endblock %}
 
 {% block content %}
-<div class="card card-success">
+<div class="card card-info">
     <div class="card-header">
         <h3 class="card-title">
         {% if action == 'add' %}
             <i class="fas fa-plus"></i>
         {% else %}
-            <i class="fas fa-edit"></i>
+            <a href="{% url 'erp:product_update' pk=object.pk %}" style="float: right;"><i class="fas fa-edit"></i></a>
         {% endif %}
 
         {{ title }}
         </h3>
     </div>
-    <div class="card-body" style="text-align: center;background-color: black; color: white ; font-size:22px ; font-family:Saira Extra Condensed, sans-serif;">
+    <div class="card-body" style="text-align: center;background-color: rgb(0, 153, 204); color: black ; font-size:22px ; font-family:Saira Extra Condensed, sans-serif;">
         {% csrf_token %}
         <input type="hidden" name="action" value="{{ action }}">
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-1 col-md-1">Fecha: </div>
-                <div class="col-xs-3 col-md-3">{{ product.date_joined }}</div>
-                <div class="col-xs-2 col-md-2">Edad: </div>
-                <div class="col-xs-1 col-md-1">{{product.edad }}</div>
-                <div class="col-xs-2 col-md-2">Identificacion: </div>
-                <div class="col-xs-4 col-md-3">{{product.identificacion}}</div>
+                <div class="col-xs-5 col-md-5"><u style="color:maroon;">Fecha:</u><br> <b>{{ product.date_joined }}</b>  </div>
+                <div class="col-xs-2 col-md-2"><u style="color:maroon;">Edad:</u><br> <b>{{product.edad }}</b></div>
+                <div class="col-xs-5 col-md-5"><u style="color:maroon;">Identificacion:</u><br> <b>{{product.identificacion}}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row" style="text-align: center">
-                <div class="col-xs-2 col-md-2">Nombre: </div>
-                <div class="col-xs-10 col-md-10">{{product.name}}</div>
+                <div class="col-xs-12 col-md-12" ><u style="color:maroon;">Nombre: </u><br> <b>{{product.name}} </b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-2 col-md-2">Procedimientos:</div>
-                <div class="col-xs-10 col-md-10">
+                <div class="col-xs-12 col-md-12"><u style="color:maroon;">Procedimientos:</u><br>
                     {% for a in  product.procedimientos.all %}
-                        {{ a.name }} - 
+                    <b>{{ a.name }} -</b>
                     {% endfor %}
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-2 col-md-2">Cirujano 1:</div>
-                <div class="col-xs-4 col-md-4">{{ product.cirujano }}</div>
-                <div class="col-xs-2 col-md-2">Cirujano 2:</div>
-                <div class="col-xs-4 col-md-4">{{ product.cirujano2 }}</div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Cirujano 1: </u><br><b>{{ product.cirujano }}</b></div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Cirujano 2: </u><br><b>{{ product.cirujano2 }}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-6 col-md-6">Inicio Anestesia: {{ product.inicioanestesia }}</div>
-
-                <div class="col-xs-6 col-md-6">Inicio Cirugia: {{ product.iniciocirugia }}</div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Inicio Anestesia: </u><br><b>{{ product.inicioanestesia }}</b></div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Fin Anestesia: </u><br><b>{{ product.finalizacionanestesia }}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-6 col-md-6">Fin Cirugia: {{ product.finalizacioncirugia }}</div>
-                <div class="col-xs-6 col-md-6">Fin Anestesia: {{ product.finalizacionanestesia }}</div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Inicio Cirugia: </u><br><b>{{ product.iniciocirugia }}</b></div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Fin Cirugia: </u><br><b>{{ product.finalizacioncirugia }}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-2 col-md-2">Klein:</div>
-                <div class="col-xs-10 col-md-10">{{ product.klein }}</div>
+                <div class="col-xs-4 col-md-4"><u style="color:maroon;">Klein:</u><br> <b>{{ product.klein }}</b></div>
+                <div class="col-xs-4 col-md-4"><u style="color:maroon;">Extrae:</u><br> <b>{{ product.extrae }}</b></div>
+                <div class="col-xs-4 col-md-4"><u style="color:maroon;">Transferencia:</u><br> <b>{{ product.transferencia }}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-2 col-md-2">Extrae:</div>
-                <div class="col-xs-4 col-md-4">{{ product.extrae }}</div>
-                <div class="col-xs-2 col-md-2">Transferencia:</div>
-                <div class="col-xs-4 col-md-4">{{ product.transferencia }}</div>
-            </div>
-        </div>            
-        <div class="form-group">
-            <div class="row">
-                <div class="col-xs-1 col-md-1">MD:</div>
-                <div class="col-xs-5 col-md-5">{{ product.md }}</div>
-                <div class="col-xs-1 col-md-1">MI:</div>
-                <div class="col-xs-5 col-md-5">{{ product.mi }}</div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Mama Derecha:</u><br> <b>{{ product.md }}</b></div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Mama Izquierda:</u><br> <b>{{ product.mi }}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-2 col-md-2">Colgajo D:</div>
-                <div class="col-xs-4 col-md-4">{{ product.colgajo }}</div>
-                <div class="col-xs-2 col-md-2">Colgajo I:</div>
-                <div class="col-xs-4 col-md-4">{{ product.colgajo2 }}</div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Colgajo Derecho:</u><br> <b>{{ product.colgajo }}</b></div>
+                <div class="col-xs-6 col-md-6"><u style="color:maroon;">Colgajo Izquierdo:</u><br> <b>{{ product.colgajo2 }}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-12 col-md-12">Observaciones:</div>
-                <div class="col-xs-12 col-md-12" >{{ product.observaciones}}</div>
+                <div class="col-xs-12 col-md-12"><u style="color:maroon;">Observaciones:</u></div>
+                <div class="col-xs-12 col-md-12"><b>{{ product.observaciones}}</b></div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-4 col-md-4">Duracion de la cirugia:</div>
-                <div class="col-xs-8 col-md-8" >{{ product.duracion}}</div>
+                <div class="col-xs-12 col-md-12"><u style="color:maroon;">Duracion de la cirugia:</u><br> <b>{{ product.duracion}}</b></div>
             </div>
         </div>
              
-    {% comment %}
-        <section class="awSlider">
-        <div  id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-            <li data-target="myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="myCarousel" data-slide-to="1"></li>
-            <li data-target="myCarousel" data-slide-to="2"></li>
-            <li data-target="myCarousel" data-slide-to="3"></li>
-            </ol>
-        
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="{{ product.get_image }}" height="550px" width="500px">
-                <div class="carousel-caption">Paciente</div>
-            </div>
-            <div class="item">
-                <img src="{{ product.get_image }}" height="550px" width="500px">
-                <div class="carousel-caption">Paciente 2</div>
-            </div>
-            <div class="item">
-                <img src="{{ product.get_image }}" height="550px" width="500px">
-                <div class="carousel-caption">Paciente 2</div>
-            </div>
-            <div class="item">
-                <img src="{{ product.get_image }}" height="550px" width="500px">
-                <div class="carousel-caption">Paciente 2</div>
-            </div>
-            </div>
-        
-            <!-- Controls -->
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Left</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Right</span>
-            </a>
-        </div>
-        </section>
-    {% endcomment %}
-        <div class="row">
-            <div class="imagenes">  
-                <ul class="slider">
-                    <li id="slide1">
-                        <img src="{{ product.get_image }}" height="550px" width="500px">
-                    </li>
-                    <li id="slide2">
-                        <img src="{{ product.get_image2 }}" height="550px" width="500px">
-                    </li>
-                    <li id="slide3">
-                        <img src="{{ product.get_image3 }}" height="800px" width="700px">
-                    </li>
-                    <li id="slide4">
-                        <img src="{{ product.get_image4 }}" height="550px" width="500px">
-                    </li>
-                </ul>
-        
-                <ul class="menu">
-                    <li>
-                        <a href="#slide1">1</a>
-                    </li>
-                    <li>
-                        <a href="#slide2">2</a>
-                    </li>
-                    <li>
-                        <a href="#slide3">3</a>
-                    </li>
-                    <li>
-                        <a href="#slide4">4</a>
-                    </li>
-                </ul>
-            </div>   
-        </div>
+
+
         <div class="container gallery-container">
 
             <h1>Imagenes</h1>
@@ -371,7 +226,7 @@
                   
 
     <div class="card-footer">
-        <a href="{{ update_url }}" class="btn btn-danger btn-flat">
+        <a href="{% url 'erp:product_update' pk=object.pk %}" class="btn btn-danger btn-flat">
             <i class="fas fa-edit"></i> Editar
         </a>
         <a href="{{ list_url }}" class="btn btn-danger btn-flat">
@@ -381,23 +236,9 @@
 </div>
 {% endblock %}
 {% block javascript %}
-<script>
 
-// $('section.awSlider .carousel').carousel({
-// 	pause: "hover",
-//   interval: 000
-// });
-
-// var startImage = $('section.awSlider .item.active > img').attr('src');
-// $('section.awSlider').append('<img src="' + startImage + '">');
-
-// $('section.awSlider .carousel').on('slid.bs.carousel', function () {
-//  var bscn = $(this).find('.item.active > img').attr('src');
-// 	$('section.awSlider > img').attr('src',bscn);
-// });
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script>
     baguetteBox.run('.tz-gallery');
-</script>
 </script>
 {% endblock %}

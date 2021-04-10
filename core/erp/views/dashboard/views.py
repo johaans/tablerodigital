@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from core.erp.models import Sale, Product, DetSale,Category,Procedimientos
+from core.erp.models import Product,Category,Procedimientos
 
 from random import randint
 
@@ -30,20 +30,20 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             action = request.POST['action']
             if action == 'get_graph_sales_year_month':
                 data = {
-                    'name': 'Porcentaje de venta',
+                    'name': 'Cantidad de Procedimientos',
                     'showInLegend': False,
                     'colorByPoint': True,
                     'data': self.get_graph_sales_year_month()
                 }
             elif action == 'get_graph_sales_products_year_month':
                 data = {
-                    'name': 'Porcentaje',
+                    'name': 'Porcentaje Procedimientos',
                     'colorByPoint': True,
                     'data': self.get_graph_sales_products_year_month(),
                 }
             elif action == 'get_graph_sales_products_year_month2':
                 data = {
-                    'name': 'Porcentaje',
+                    'name': 'Porcentaje Procedimientos',
                     'colorByPoint': True,
                     'data': self.get_graph_sales_products_year_month2(),
                 }
@@ -79,7 +79,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         month = datetime.now().month
         try:
             for p in Category.objects.all():
-                total = Product.objects.filter(date_joined__year=year, date_joined__month=month,
+                total = Product.objects.filter(date_joined__year=year,
                                                cirujano_id=p.id).count()
                 if total > 0:
                     data.append({
@@ -96,7 +96,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         month = datetime.now().month
         try:
             for p in Category.objects.all():
-                total = Product.objects.filter(date_joined__year=year, date_joined__month=month,
+                total = Product.objects.filter(date_joined__year=year,
                                                cirujano2_id=p.id).count()
                 if total > 0:
                     data.append({
@@ -113,8 +113,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         month = datetime.now().month
         try:
             for p in Procedimientos.objects.all():
-                total = Product.objects.filter(date_joined__year=year, date_joined__month=month,
-                                               procedimientos_id=p.id).count()
+                total = Product.objects.filter(date_joined__year=year,procedimientos_id=p.id).count()
                                                
                 if total > 0:
                     data.append({

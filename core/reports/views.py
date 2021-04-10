@@ -35,7 +35,7 @@ class ReportSaleView(TemplateView):
                     s.name,
                     s.edad,
                     s.identificacion,
-                    s.cirugias,
+                    s.procedimientos.all,
                     #s.cirujano.name,
                     #s.cirujano2.name,
                     s.date_joined.strftime('%Y-%m-%d'),

@@ -12,7 +12,7 @@
 {% endblock %}
 {% block content %}
     <form method="post" action="." enctype="multipart/form-data">
-        <div class="card card-primary">
+        <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">
                     {% if action == 'add' %}
@@ -74,44 +74,36 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-6 col-md-6">Inicio Anestesia: {% render_field form.inicioanestesia type="time" %}</div>
-
-                        <div class="col-xs-6 col-md-6">Inicio Cirugia: {% render_field form.iniciocirugia type="time" %}</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6 col-md-6">Fin Cirugia: {% render_field form.finalizacioncirugia type="time" %}</div>
                         <div class="col-xs-6 col-md-6">Fin Anestesia: {% render_field form.finalizacionanestesia type="time" %}</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-2 col-md-2">{{ form.klein.label }}:</div>
-                        <div class="col-xs-10 col-md-10">{{ form.klein }}</div>
+                        <div class="col-xs-6 col-md-6">Inicio Cirugia: {% render_field form.iniciocirugia type="time" %}</div>
+                        <div class="col-xs-6 col-md-6">Fin Cirugia: {% render_field form.finalizacioncirugia type="time" %}</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-2 col-md-2">{{ form.extrae.label }}:</div>
-                        <div class="col-xs-4 col-md-4">{{ form.extrae }}</div>
-                        <div class="col-xs-2 col-md-2">{{ form.transferencia.label }}:</div>
-                        <div class="col-xs-4 col-md-4">{{ form.transferencia }}</div>
+                        <div class="col-xs-4 col-md-4">{{ form.klein.label }}: {{ form.klein }}</div>
+                        <div class="col-xs-4 col-md-4">{{ form.extrae.label }}: {{ form.extrae }}</div>
+                        <div class="col-xs-4 col-md-4">{{ form.transferencia.label }}: {{ form.transferencia }}</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-1 col-md-1">{{ form.md.label }}:</div>
-                        <div class="col-xs-5 col-md-5">{{ form.md }}</div>
-                        <div class="col-xs-1 col-md-1">{{ form.mi.label }}:</div>
-                        <div class="col-xs-5 col-md-5">{{ form.mi }}</div>
+                        <div class="col-xs-2 col-md-2">Mama Der:</div>
+                        <div class="col-xs-4 col-md-4">{{ form.md }}</div>
+                        <div class="col-xs-2 col-md-2">Mama Izq:</div>
+                        <div class="col-xs-4 col-md-4">{{ form.mi }}</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-3 col-md-2">{{ form.colgajo.label}}:</div>
-                        <div class="col-xs-3 col-md-4">{{ form.colgajo }}</div>
-                        <div class="col-xs-3 col-md-2">{{ form.colgajo2.label }}:</div>
-                        <div class="col-xs-3 col-md-4">{{ form.colgajo2 }}</div>
+                        <div class="col-xs-2 col-md-3">Colgajo Der:</div>
+                        <div class="col-xs-4 col-md-3">{{ form.colgajo }}</div>
+                        <div class="col-xs-2 col-md-3">Colgajo Izq:</div>
+                        <div class="col-xs-4 col-md-3">{{ form.colgajo2 }}</div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -169,12 +161,6 @@
             });
         {% endif %}
 
-        $('form').on('submit', function (e) {
-            e.preventDefault();
-            var parameters = new FormData(this);
-            submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
-                location.href = '{{ list_url }}';
-            });
-        });
+
     </script>
 {% endblock %}
