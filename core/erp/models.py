@@ -94,6 +94,10 @@ class Product(models.Model):
     colgajo2 = models.CharField('Colgajo I', max_length=10, null=True, blank=True)
     observaciones = models.TextField('Observaciones', max_length=999, null=True, blank=True)
     procedimientos=models.ManyToManyField(Procedimientos)
+    hb = models.DecimalField(verbose_name='Hemoglobina' ,default=0.00, max_digits=5, decimal_places=2)
+    inr =models.DecimalField(verbose_name='INR' ,default=0.00, max_digits=5, decimal_places=2)
+    plaquetas =models.DecimalField(verbose_name='Plaquetas' ,default=0.00, max_digits=5, decimal_places=2)
+
 
     def __str__(self):
         return self.name
