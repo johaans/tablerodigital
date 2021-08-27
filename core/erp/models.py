@@ -96,7 +96,7 @@ class Product(models.Model):
     procedimientos=models.ManyToManyField(Procedimientos)
     hb = models.DecimalField(verbose_name='Hemoglobina' ,default=0.00, max_digits=5, decimal_places=2)
     inr =models.DecimalField(verbose_name='INR' ,default=0.00, max_digits=5, decimal_places=2)
-    plaquetas =models.DecimalField(verbose_name='Plaquetas' ,default=0.00, max_digits=5, decimal_places=2)
+    plaquetas =models.DecimalField(verbose_name='Plaquetas' ,default=0.00, max_digits=9, decimal_places=2)
 
 
     def __str__(self):
@@ -139,7 +139,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Paciente'
         verbose_name_plural = 'Pacientes'
-        ordering = ['date_joined']
+        ordering = ['-id']
 
 
 

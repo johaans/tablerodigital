@@ -26,7 +26,7 @@ class ProductListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListV
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Product.objects.all():
+                for i in Product.objects.order_by('-id'):
                     data.append(i.toJSON())
             else:
                 data['error'] = 'Ha ocurrido un error'

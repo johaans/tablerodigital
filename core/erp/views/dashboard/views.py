@@ -53,6 +53,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                     'colorByPoint': True,
                     'data': self.get_graph_procedimientos_year_month(),
                 }
+
             elif action == 'get_graph_online':
                 data = {'y': randint(1, 100)}
                 print(data)
@@ -112,10 +113,23 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         year = datetime.now().year
         month = datetime.now().month
         try:
-            for p in Procedimientos.objects.all():
-                total = Product.objects.filter(date_joined__year=year,procedimientos_id=p.id).count()
+            # a=Product.objects.all()
+            # for p in a:
+            #     total=5
+            #     print(total)
+            #     total = Product.objects.filter(date_joined__year=year,procedimientos_id=p.id).count()
+                
                                                
+            #     if total > 0:
+            #         data.append({
+            #             'name': p.name,
+            #             'y': float(total)
+            #         })
+            for p in Procedimientos.objects.all():
+                total = Product.objects.filter(date_joined__year=year,
+                                               procedimientos__id=p.id).count()
                 if total > 0:
+                    print(p.name,total)
                     data.append({
                         'name': p.name,
                         'y': float(total)

@@ -119,44 +119,44 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# STATIC_URL = '/static/'
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
-
-# LOGIN_REDIRECT_URL = '/erp/dashboard/'
-
-# LOGOUT_REDIRECT_URL = '/login/'
-
-# LOGIN_URL = '/login/'
-
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-# MEDIA_URL = '/media/'
-
-# AUTH_USER_MODEL = 'user.User'
-
-# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR,'static','media')
-# STATICFILES_DIRS = (
-#      os.path.join(BASE_DIR, 'static'),
-#  )
-LOGIN_REDIRECT_URL = 'index'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+LOGIN_REDIRECT_URL = '/erp/dashboard/'
 
 LOGOUT_REDIRECT_URL = '/login/'
 
 LOGIN_URL = '/login/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'user.User'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/media/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# MEDIA_ROOT = os.path.join(BASE_DIR,'static','media')
+# # STATICFILES_DIRS = (
+# #      os.path.join(BASE_DIR, 'static'),
+# #  )
+# LOGIN_REDIRECT_URL = 'index'
+
+# LOGOUT_REDIRECT_URL = '/login/'
+
+# LOGIN_URL = '/login/'
+
+
+# AUTH_USER_MODEL = 'user.User'
+
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 # Email
 
 EMAIL_HOST = 'smtp.gmail.com'

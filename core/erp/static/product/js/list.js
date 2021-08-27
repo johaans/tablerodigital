@@ -1,5 +1,6 @@
 $(function () {
     $('#data').DataTable({
+        order:[0,'desc'],
         responsive: true,
         autoWidth: false,
         destroy: true,
